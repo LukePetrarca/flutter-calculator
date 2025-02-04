@@ -52,7 +52,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           final evaluator = const ExpressionEvaluator();
           final Map<String, dynamic> context = {};
           final num result = evaluator.eval(expression, context);
-          _result = (result * result).toString();
+          _expression = (result * result).toString();
+          _result = _expression;
         } catch (e) {
           _result = 'Error';
         }
@@ -112,7 +113,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               Row(children: [_buildButton('4'), _buildButton('5'), _buildButton('6'), _buildButton('*')]),
               Row(children: [_buildButton('1'), _buildButton('2'), _buildButton('3'), _buildButton('-')]),
               Row(children: [_buildButton('0'), _buildButton('.'), _buildButton('='), _buildButton('+')]),
-              Row(children: [_buildButton('%'), _buildButton('x²'), _buildButton('C')]),
+              Row(children: [_buildButton('x²'), _buildButton('C')]),
             ],
           )
         ],
