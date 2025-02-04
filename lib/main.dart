@@ -41,8 +41,19 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         try {
           final expression = Expression.parse(_expression);
           final evaluator = const ExpressionEvaluator();
-          final Map<String, dynamic> context = {};  // Fix applied here
+          final Map<String, dynamic> context = {};
           _result = evaluator.eval(expression, context).toString();
+        } catch (e) {
+          _result = 'Error';
+        }
+      } else if (value == 'x²') {
+        try {
+          final expression = Expression.parse(_expression);
+          final evaluator = const ExpressionEvaluator();
+          final Map<String, dynamic> context = {};
+          final num result = evaluator.eval(expression, context);
+          _expression = (result * result).toString();
+          _result = _expression;
         } catch (e) {
           _result = 'Error';
         }
@@ -71,7 +82,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calculator by [Your Name]'),
+        title: const Text('Calculator by [Luke Petrarca]'),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Column(
@@ -102,7 +113,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               Row(children: [_buildButton('4'), _buildButton('5'), _buildButton('6'), _buildButton('*')]),
               Row(children: [_buildButton('1'), _buildButton('2'), _buildButton('3'), _buildButton('-')]),
               Row(children: [_buildButton('0'), _buildButton('.'), _buildButton('='), _buildButton('+')]),
-              Row(children: [_buildButton('C')]),
+              Row(children: [_buildButton('x²'), _buildButton('C')]),
             ],
           )
         ],
